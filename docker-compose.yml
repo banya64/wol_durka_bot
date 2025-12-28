@@ -1,0 +1,7 @@
+services:
+  wolbot:
+    build: .
+    container_name: wolbot-container  # имя контейнера
+    restart: always
+    volumes:
+      - ./config.json:/app/config.json
