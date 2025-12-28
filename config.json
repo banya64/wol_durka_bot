@@ -1,6 +1,7 @@
 {
-  "bot_token": "8032177899:AAEUJuipNTGA_V55se2C8tgOJYbqACvT9l8",
+  "bot_token": "",
   "mac_address": "B4-2E-99-83-26-99",
   "broadcast_ip": "192.168.1.100",
-  "whitelist": [730616101]
+  "whitelist": [yout_tg_id]
 }
+
