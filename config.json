@@ -1,7 +1,8 @@
 {
   "bot_token": "",
-  "mac_address": "B4-2E-99-83-26-99",
+  "mac_address": "AA-BB-CC-DD-EE-FF",
   "broadcast_ip": "192.168.1.100",
   "whitelist": [yout_tg_id]
 }
+
 
