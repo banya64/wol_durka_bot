@@ -5,3 +5,8 @@ services:
     restart: always
     volumes:
       - ./config.json:/app/config.json
+      - bot_logs:/app/logs  # том для логов, чтобы они сохранялись при перезапуске контейнера
+
+volumes:
+  bot_logs:
+    driver: local
