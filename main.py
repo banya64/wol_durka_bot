@@ -5,13 +5,39 @@ from telegram.ext import Application, CommandHandler, MessageHandler, filters, C
 from wakeonlan import send_magic_packet
 import logging
 import re
+from logging.handlers import RotatingFileHandler
 
-# Настройка логирования
-logging.basicConfig(
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
-    level=logging.INFO
-)
-logger = logging.getLogger(__name__)
+# Настройка логирования с ротацией файлов
+def setup_logging():
+    logger = logging.getLogger(__name__)
+    logger.setLevel(logging.INFO)
+    
+    # Формат логов
+    formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+    
+    # Ротационный файл-лог: макс 5 МБ, хранить 3 файла
+    log_path = "/app/logs/bot.log"
+    os.makedirs(os.path.dirname(log_path), exist_ok=True)
+    file_handler = RotatingFileHandler(
+        log_path,
+        maxBytes=5*1024*1024,  # 5 МБ
+        backupCount=3,          # храним 3 старых файла + текущий
+        encoding='utf-8'
+    )
+    file_handler.setFormatter(formatter)
+    file_handler.setLevel(logging.INFO)
+    
+    # Также вывод в консоль (для docker logs)
+    console_handler = logging.StreamHandler()
+    console_handler.setFormatter(formatter)
+    console_handler.setLevel(logging.INFO)
+    
+    logger.addHandler(file_handler)
+    logger.addHandler(console_handler)
+    
+    return logger
+
+logger = setup_logging()
 
 # Путь к файлу конфигурации
 CONFIG_PATH = "/app/config.json"

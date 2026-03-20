@@ -13,5 +13,8 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Копирование кода
 COPY main.py .
 
+# Создание директории для логов и установка прав
+RUN mkdir -p /app/logs && chmod 755 /app/logs
+
 # Команда для запуска бота
 CMD ["python", "main.py"]
